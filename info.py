@@ -25,7 +25,7 @@ MOVIE_GROUP_LINK = environ.get('MOVIE_GROUP_LINK', 'https://t.me/+JqkfroPkJaVhMm
 CHANNELS = [int(ch) if id_pattern.search(ch) else ch for ch in environ.get('CHANNELS', '-1002226519917').split()]
 #---------------------------------------------------------------
 #---------------------------------------------------------------
-DATABASE_URI = environ.get('DATABASE_URI', "")
+DATABASE_URI = environ.get('DATABASE_URI', "mongodb+srv://Db6:Db6@cluster0.8dtyu.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 DATABASE_NAME = environ.get('DATABASE_NAME', "Cluster0")
 COLLECTION_NAME = environ.get('COLLECTION_NAME', 'Telegram_files')
 #---------------------------------------------------------------
@@ -35,7 +35,7 @@ LOG_API_CHANNEL = int(environ.get('LOG_API_CHANNEL', '0'))  # set shortner log c
 DELETE_CHANNELS = int(environ.get('DELETE_CHANNELS','0')) # The movie you upload in it will be deleted from the bot.
 LOG_VR_CHANNEL = int(environ.get('LOG_VR_CHANNEL', '0'))
 auth_channel = environ.get('AUTH_CHANNEL', '-1002226519917')
-SUPPORT_GROUP = int(environ.get('SUPPORT_GROUP', '0'))
+SUPPORT_GROUP = int(environ.get('SUPPORT_GROUP', '-1002188337678'))
 request_channel = environ.get('REQUEST_CHANNEL', '0') # If anyone sends a request message to your bot, you will get it in this channel.
 MOVIE_UPDATE_CHANNEL = int(environ.get('MOVIE_UPDATE_CHANNEL', '-1002367378650')) # 
 SUPPORT_CHAT = environ.get('SUPPORT_CHAT', 'https://t.me/join_movies_adda_support') #Support group link ( make sure bot is admin )
