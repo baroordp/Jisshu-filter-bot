@@ -23,6 +23,7 @@ USERNAME = environ.get('USERNAME', "https://t.me/payer_17") # ADMIN USERNAME
 LOG_CHANNEL = int(environ.get('LOG_CHANNEL', '-1001956199528'))
 MOVIE_GROUP_LINK = environ.get('MOVIE_GROUP_LINK', 'https://t.me/+JqkfroPkJaVhMmE1')
 CHANNELS = [int(ch) if id_pattern.search(ch) else ch for ch in environ.get('CHANNELS', '-1002226519917').split()]
+USE_CAPTION_FILTER = is_enabled((environ.get('USE_CAPTION_FILTER', 'True')), True)
 #---------------------------------------------------------------
 #---------------------------------------------------------------
 SECONDDB_URI = environ.get('SECONDDB_URI', "")
