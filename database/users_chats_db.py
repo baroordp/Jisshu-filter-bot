@@ -21,6 +21,20 @@ class Database:
         self.grp_and_ids = fsubs.grp_and_ids
         self.movies_update_channel = mydb.movies_update_channel
         self.botcol = mydb.botcol
+        #secondary db
+        self.col2 = mydb.users
+        self.grp2 = mydb.groups
+        self.misc2 = mydb.misc
+        self.verify_id2 = mydb.verify_id
+        self.users2 = mydb.uersz
+        self.req2 = mydb.requests
+        self.mGrp2 = mydb.mGrp
+        self.pmMode2 = mydb.pmMode
+        self.jisshu_ads_link2 = mydb.jisshu_ads_link
+        self.grp_and_ids2 = fsubs.grp_and_ids
+        self.movies_update_channel2 = mydb.movies_update_channel
+        self.botcol2 = mydb.botcol
+        
     def new_user(self, id, name):
         return dict(
             id = id,
