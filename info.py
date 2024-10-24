@@ -29,6 +29,8 @@ SECONDDB_URI = environ.get('SECONDDB_URI', "")
 DATABASE_URI = environ.get('DATABASE_URI', "mongodb+srv://Db6:Db6@cluster0.8dtyu.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 DATABASE_NAME = environ.get('DATABASE_NAME', "Cluster0")
 COLLECTION_NAME = environ.get('COLLECTION_NAME', 'Telegram_files')
+#temp dict for storing the db uri which will be used for storing user, chat and file infos
+tempDict = {'indexDB': DATABASE_URI}
 #---------------------------------------------------------------
 #---------------------------------------------------------------
 #----------- There will be channel id add in all these ---------
