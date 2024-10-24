@@ -22,18 +22,18 @@ class Database:
         self.movies_update_channel = mydb.movies_update_channel
         self.botcol = mydb.botcol
         #secondary db
-        self.col2 = mydb.users
-        self.grp2 = mydb.groups
-        self.misc2 = mydb.misc
-        self.verify_id2 = mydb.verify_id
-        self.users2 = mydb.uersz
-        self.req2 = mydb.requests
-        self.mGrp2 = mydb.mGrp
-        self.pmMode2 = mydb.pmMode
-        self.jisshu_ads_link2 = mydb.jisshu_ads_link
-        self.grp_and_ids2 = fsubs.grp_and_ids
-        self.movies_update_channel2 = mydb.movies_update_channel
-        self.botcol2 = mydb.botcol
+        self.col2 = mydb2.users
+        self.grp2 = mydb2.groups
+        self.misc2 = mydb2.misc
+        self.verify_id2 = mydb2.verify_id
+        self.users2 = mydb2.uersz
+        self.req2 = mydb2.requests
+        self.mGrp2 = mydb2.mGrp
+        self.pmMode2 = mydb2.pmMode
+        self.jisshu_ads_link2 = mydb2.jisshu_ads_link
+        self.grp_and_ids2 = fsubs2.grp_and_ids
+        self.movies_update_channel2 = mydb2.movies_update_channel
+        self.botcol2 = mydb2.botcol
         
     def new_user(self, id, name):
         return dict(
@@ -75,7 +75,10 @@ class Database:
     
     async def add_user(self, id, name):
         user = self.new_user(id, name)
-        await self.col.insert_one(user)
+        if tempDict['indexDB'] == DATABASE_URI:
+            await self.col.insert_one(user)
+        else:
+            await self.col2.insert_one(user)
         
     async def update_point(self ,id):
         await self.col.update_one({'id' : id} , {'$inc':{'point' : 100}})
@@ -97,10 +100,12 @@ class Database:
         
     async def is_user_exist(self, id):
         user = await self.col.find_one({'id':int(id)})
+        if not user:
+            user = await self.col2.find_one({'id':int(id)})
         return bool(user)
     
     async def total_users_count(self):
-        count = await self.col.count_documents({})
+        count = await self.col.count_documents({})+await self.col2.count_documents({})
         return count
     
     async def get_all_users(self):
@@ -254,14 +259,22 @@ class Database:
             is_banned=False,
             ban_reason=''
         )
-        await self.col.update_one({'id': id}, {'$set': {'ban_status': ban_status}})
+        user = await self.col.find_one({'id': int(id)})
+        if not user:
+            await self.col2.update_one({'id': id}, {'$set': {'ban_status': ban_status}})
+        else:
+            await self.col.update_one({'id': id}, {'$set': {'ban_status': ban_status}})
     
     async def ban_user(self, user_id, ban_reason="No Reason"):
         ban_status = dict(
             is_banned=True,
             ban_reason=ban_reason
         )
-        await self.col.update_one({'id': user_id}, {'$set': {'ban_status': ban_status}})
+        user = await self.col.find_one({'id': int(user_id)})
+        if not user:
+            await self.col2.update_one({'id': user_id}, {'$set': {'ban_status': ban_status}})
+        else:
+            await self.col.update_one({'id': user_id}, {'$set': {'ban_status': ban_status}})
 
     async def get_ban_status(self, id):
         default = dict(
